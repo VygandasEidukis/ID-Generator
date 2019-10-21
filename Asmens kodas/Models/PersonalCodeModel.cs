@@ -8,12 +8,46 @@ namespace Asmens_kodas.Models
 {
     public class PersonalCodeModel
     {
+        #region Prop
+        private List<int> CodeList
+        {
+            get 
+            {
+                List<int> codeList = new List<int>();
+                foreach(char number in Code.ToString())
+                {
+                    codeList.Add(int.Parse(number.ToString()));
+                }
+                return codeList;
+            }
+        }
         public long Code { get; set; }
+        #endregion
+
         public PersonalCodeModel(DateTime date, GenderEnum gender, int lineNumber) 
         {
             CreateCode(date, gender, lineNumber);
         }
 
+        public PersonalCodeModel(long Code)
+        {
+            this.Code = Code;
+            if (!IsValidCode(Code))
+            {
+                throw new Exception("invalid code");
+            }
+        }
+
+        #region Private functions
+        private bool IsValidCode(long code)
+        {
+            if (code.ToString().Length != 11)
+                return false;
+
+            if (GetLastDidget(code) != int.Parse(code.ToString().Substring(10, 1)))
+                return false;
+            return true;
+        }
         private void CreateCode(DateTime date, GenderEnum gender, int lineNumber)
         {
             Code = GetGenderDidget(date.Year, gender);
@@ -101,5 +135,54 @@ namespace Asmens_kodas.Models
         {
             return (int)Math.Round((double)(year / 100), 0) + 1;
         }
+        #endregion
+
+        #region public functions
+        public DateTime getDate()
+        {
+            return new DateTime(getYear(),getMonth(),getDay());
+        }
+
+        public int getYear()
+        {
+            if(CodeList[1] > 6 && CodeList[0] <= 4)
+            {
+                return 1900 + CodeList[1] * 10 + CodeList[2];
+            }
+            else
+            {
+                return 2000 + CodeList[1] * 10 + CodeList[2];
+            }
+        }
+
+        public int getMonth()
+        {
+            return CodeList[3] * 10 + CodeList[4];
+        }
+
+        public int getDay()
+        {
+            return CodeList[5] * 10 + CodeList[6];
+        }
+
+        public GenderEnum getSex()
+        {
+            if(CodeList[0] % 2 == 0)
+            {
+                return GenderEnum.Female;
+            }
+            return GenderEnum.Male;
+        }
+
+        public int getNumber()
+        {
+            return CodeList[7] * 100 + CodeList[8] * 10 + CodeList[9];
+        }
+
+        public int getCheckSum()
+        {
+            return CodeList[10];
+        }
+        #endregion
     }
 }

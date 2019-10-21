@@ -22,6 +22,24 @@ namespace Asmens_kodas
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PersonalCodeModel _PCM;
+
+        public PersonalCodeModel PCM
+        {
+            get { return _PCM; }
+            set { 
+                _PCM = value;
+                getDate.Text = PCM.getDate().ToString("yyyy-MM-dd");
+                getYear.Text = PCM.getYear().ToString();
+                getMonth.Text = PCM.getMonth().ToString();
+                getDay.Text = PCM.getDay().ToString();
+                getSex.Text = PCM.getSex().ToString();
+                getNumber.Text = PCM.getNumber().ToString();
+                getCheckSum.Text = PCM.getCheckSum().ToString();
+            }
+        }
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,15 +47,15 @@ namespace Asmens_kodas
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(EilesNr.Text.Count() == 3)
+            if (EilesNr.Text.Count() == 3)
             {
                 if ((bool)RadioMale.IsChecked)
                 {
-                    PersonalCodeModel pcm = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
+                    PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
                 }
                 else
                 {
-                    PersonalCodeModel pcm = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
+                    PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
                 }
             }
             
@@ -50,6 +68,24 @@ namespace Asmens_kodas
             {
                 e.Handled = false;
             }else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            PCM = new PersonalCodeModel(long.Parse(Kodas.Text));
+        }
+
+        private void Kodas_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex reg = new Regex("[^0-9]");
+            if (!reg.IsMatch(e.Text) && (sender as TextBox).Text.Length < 11)
+            {
+                e.Handled = false;
+            }
+            else
             {
                 e.Handled = true;
             }

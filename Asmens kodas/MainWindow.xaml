@@ -10,32 +10,105 @@
     Height="450"
     mc:Ignorable="d">
     <Grid>
-        <Border
-            Margin="10"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            BorderBrush="Black"
-            BorderThickness="1">
-            <StackPanel Margin="20">
-                <TextBlock Text="Date of birth" />
-                <DatePicker x:Name="BirthDate" />
-                <StackPanel Orientation="Horizontal">
-                    <RadioButton
-                        x:Name="RadioMale"
-                        Margin="10"
-                        Content="Male" />
-                    <RadioButton
-                        x:Name="RadioFemale"
-                        Margin="10"
-                        Content="Female" />
-                </StackPanel>
-                <TextBlock Text="Eiles numeris" />
-                <TextBox
-                    x:Name="EilesNr"
-                    Margin="0,5,0,5"
-                    PreviewTextInput="EilesNr_PreviewTextInput" />
-                <Button Click="Button_Click" Content="Create ID" />
+        <StackPanel Orientation="Horizontal">
+            <StackPanel>
+                <Border
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Date of birth" />
+                        <DatePicker x:Name="BirthDate" />
+                        <StackPanel Orientation="Horizontal">
+                            <RadioButton
+                                x:Name="RadioMale"
+                                Margin="10"
+                                Content="Male" />
+                            <RadioButton
+                                x:Name="RadioFemale"
+                                Margin="10"
+                                Content="Female" />
+                        </StackPanel>
+                        <TextBlock Text="Eiles numeris" />
+                        <TextBox
+                            x:Name="EilesNr"
+                            Margin="0,5,0,5"
+                            PreviewTextInput="EilesNr_PreviewTextInput" />
+                        <Button Click="Button_Click" Content="Create ID" />
+
+                        <Border
+                            Margin="10"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            BorderBrush="Black"
+                            BorderThickness="1">
+
+                            <Border Margin="20" BorderThickness="1">
+                                <StackPanel Width="200">
+                                    <TextBlock Text="Asmens kodas" />
+                                    <TextBox x:Name="Kodas" PreviewTextInput="Kodas_PreviewTextInput" />
+                                    <Button Click="Button_Click_1" Content="IvestiKoda" />
+                                </StackPanel>
+                            </Border>
+
+                        </Border>
+                    </StackPanel>
+                </Border>
             </StackPanel>
-        </Border>
+            <StackPanel>
+                <Border
+                    Margin="20"
+                    BorderBrush="Black"
+                    BorderThickness="1">
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Get date" />
+                        <TextBox
+                            x:Name="getDate"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Year" />
+                        <TextBox
+                            x:Name="getYear"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Month" />
+                        <TextBox
+                            x:Name="getMonth"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Day" />
+                        <TextBox
+                            x:Name="getDay"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Sex" />
+                        <TextBox
+                            x:Name="getSex"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Number" />
+                        <TextBox
+                            x:Name="getNumber"
+                            Width="150"
+                            IsEnabled="False" />
+
+                        <TextBlock Text="Get Check Sum" />
+                        <TextBox
+                            x:Name="getCheckSum"
+                            Width="150"
+                            IsEnabled="False" />
+                    </StackPanel>
+
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
     </Grid>
 </Window>

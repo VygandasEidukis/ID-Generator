@@ -26,7 +26,12 @@ namespace Asmens_kodas.Models
 
         public PersonalCodeModel(DateTime date, GenderEnum gender, int lineNumber) 
         {
-            CreateCode(date, gender, lineNumber);
+            if (date != null && gender != null && lineNumber >= 100 && lineNumber <= 999)
+            {
+                CreateCode(date, gender, lineNumber);
+            }
+            else
+                throw new Exception("Invalid data");
         }
 
         public PersonalCodeModel(long Code)

@@ -30,7 +30,10 @@
                         Content="Female" />
                 </StackPanel>
                 <TextBlock Text="Eiles numeris" />
-                <TextBox x:Name="EilesNr" Margin="0,5,0,5" />
+                <TextBox
+                    x:Name="EilesNr"
+                    Margin="0,5,0,5"
+                    PreviewTextInput="EilesNr_PreviewTextInput" />
                 <Button Click="Button_Click" Content="Create ID" />
             </StackPanel>
         </Border>

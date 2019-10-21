@@ -8,16 +8,21 @@ namespace Asmens_kodas.Models
 {
     public class PersonalCodeModel
     {
-        public int Code { get; set; }
-        public PersonalCodeModel(DateTime date, GenderEnum gender) 
+        public long Code { get; set; }
+        public PersonalCodeModel(DateTime date, GenderEnum gender, int lineNumber) 
         {
-            CreateCode(date, gender);
+            CreateCode(date, gender, lineNumber);
         }
 
-        private void CreateCode(DateTime date, GenderEnum gender)
+        private void CreateCode(DateTime date, GenderEnum gender, int lineNumber)
         {
-            GetGenderDidget(date.Year, gender);
-            GetBithDateDidgets(date);
+            Code = GetGenderDidget(date.Year, gender);
+            Code *= 1000000;
+            Code += GetBithDateDidgets(date);
+            Code *= 1000;
+            Code += lineNumber;
+            Code *= 10;
+            Code += GetLastDidget(Code);
         }
 
         private int GetGenderDidget(int year, GenderEnum gender)
@@ -61,6 +66,35 @@ namespace Asmens_kodas.Models
             }
 
             return int.Parse(dateCode);
+        }
+
+        private int GetLastDidget(long currentCode)
+        {
+            string code = currentCode.ToString();
+            List<int> codeNumbers = new List<int>();
+            foreach(char number in code)
+            {
+                codeNumbers.Add(int.Parse(number.ToString()));
+            }
+
+            int lastDidget = (codeNumbers[0] * 1) + (codeNumbers[1] * 2) + (codeNumbers[2] * 3) + (codeNumbers[3] * 4) + (codeNumbers[4] * 5) + (codeNumbers[5] * 6) + (codeNumbers[6] * 7) + (codeNumbers[7] * 8) + (codeNumbers[8] * 9) + (codeNumbers[9] * 1);
+            lastDidget = lastDidget % 11;
+            if(lastDidget >= 10)
+            {
+                lastDidget = (codeNumbers[0] * 3) + (codeNumbers[1] * 4) + (codeNumbers[2] * 5) + (codeNumbers[3] * 6) + (codeNumbers[4] * 7) + (codeNumbers[5] * 8) + (codeNumbers[6] * 9) + (codeNumbers[7] * 1) + (codeNumbers[8] * 2) + (codeNumbers[9] * 3);
+                lastDidget = lastDidget % 11;
+                if(lastDidget >= 10)
+                {
+                    return 0;
+                }else
+                {
+                    return lastDidget;
+                }
+            }
+            else
+            {
+                return lastDidget;
+            }
         }
 
         private int GetCentury(int year)

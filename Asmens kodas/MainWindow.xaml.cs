@@ -36,6 +36,7 @@ namespace Asmens_kodas
                 getSex.Text = PCM.getSex().ToString();
                 getNumber.Text = PCM.getNumber().ToString();
                 getCheckSum.Text = PCM.getCheckSum().ToString();
+                getID.Text = PCM.Code.ToString();
             }
         }
 
@@ -47,16 +48,29 @@ namespace Asmens_kodas
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (EilesNr.Text.Count() == 3)
+            try
             {
-                if ((bool)RadioMale.IsChecked)
+                if (EilesNr.Text.Count() == 3)
                 {
-                    PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
+                    if(BirthDate.SelectedDate != null)
+                    {
+                        if ((bool)RadioMale.IsChecked)
+                        {
+                            PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
+                        }
+                        else
+                        {
+                            PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
+                        }
+                    }else
+                    {
+                        MessageBox.Show("Please select date");
+                    }
+                    
                 }
-                else
-                {
-                    PCM = new PersonalCodeModel((DateTime)BirthDate.SelectedDate, GenderEnum.Male, int.Parse(EilesNr.Text));
-                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             
         }
@@ -75,7 +89,15 @@ namespace Asmens_kodas
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            PCM = new PersonalCodeModel(long.Parse(Kodas.Text));
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(Kodas.Text))
+                    PCM = new PersonalCodeModel(long.Parse(Kodas.Text));
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Kodas_PreviewTextInput(object sender, TextCompositionEventArgs e)

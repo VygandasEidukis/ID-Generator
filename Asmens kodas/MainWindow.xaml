@@ -6,11 +6,11 @@
     xmlns:local="clr-namespace:Asmens_kodas"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="545"
+    Height="352.5"
     mc:Ignorable="d">
     <Grid>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Margin="0,0,10,10">
             <StackPanel>
                 <Border
                     Margin="10"
@@ -20,12 +20,13 @@
                     BorderThickness="1">
                     <StackPanel Margin="20">
                         <TextBlock Text="Date of birth" />
-                        <DatePicker x:Name="BirthDate" />
+                        <DatePicker x:Name="BirthDate" IsTodayHighlighted="True" />
                         <StackPanel Orientation="Horizontal">
                             <RadioButton
                                 x:Name="RadioMale"
                                 Margin="10"
-                                Content="Male" />
+                                Content="Male"
+                                IsChecked="True" />
                             <RadioButton
                                 x:Name="RadioFemale"
                                 Margin="10"
@@ -59,7 +60,7 @@
             </StackPanel>
             <StackPanel>
                 <Border
-                    Margin="20"
+                    Margin="20,10,20,20"
                     BorderBrush="Black"
                     BorderThickness="1">
                     <StackPanel Margin="10">
@@ -102,6 +103,11 @@
                         <TextBlock Text="Get Check Sum" />
                         <TextBox
                             x:Name="getCheckSum"
+                            Width="150"
+                            IsEnabled="False" />
+                        <TextBlock Text="Get ID" />
+                        <TextBox
+                            x:Name="getID"
                             Width="150"
                             IsEnabled="False" />
                     </StackPanel>

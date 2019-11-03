@@ -31,7 +31,7 @@ namespace Asmens_kodas.Models
                 CreateCode(date, gender, lineNumber);
             }
             else
-                throw new Exception("Invalid data");
+                throw new Exception("Entered invalid data");
         }
 
         public PersonalCodeModel(long Code)
@@ -39,7 +39,7 @@ namespace Asmens_kodas.Models
             this.Code = Code;
             if (!IsValidCode(Code))
             {
-                throw new Exception("invalid code");
+                throw new Exception("Entered invalid code");
             }
         }
 
